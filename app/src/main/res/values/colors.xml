@@ -7,4 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    <color name="griffindor">#740001</color>
+    <color name="slytherin">#1a472a</color>
+    <color name="ravenclaw">#0c1a40</color>
+    <color name="hufflepuff">#eeb939</color>
+
 </resources>

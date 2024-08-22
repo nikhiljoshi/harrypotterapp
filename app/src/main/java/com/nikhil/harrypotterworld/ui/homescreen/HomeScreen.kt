@@ -5,21 +5,20 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -28,13 +27,11 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
@@ -113,15 +110,15 @@ fun HomeScreen(
                 ) {
 
                     LazyVerticalGrid(
-                        GridCells.Fixed(2),
+                        GridCells.Fixed(1),
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(start = 16.dp, top = 8.dp, end = 16.dp)
+                            .padding(8.dp)
                     ) {
                         items(charactersState.characters) { data ->
                             CharacterCard(
-                                data = data,
-                                openCharacterDetails = { character ->
+                                character = data,
+                                openDetailScreen = { character ->
                                     onSelect(character)
                                     navController.navigate(Screen.DetailScreen.route)
                                 }
@@ -154,43 +151,82 @@ fun HomeScreen(
 
 @Composable
 private fun CharacterCard(
-    data: CharacterModel,
-    openCharacterDetails: (CharacterModel) -> Unit
+    character: CharacterModel,
+    openDetailScreen: (CharacterModel) -> Unit
 ) {
-    Column(modifier = Modifier.fillMaxSize()) {
-        Card(
-            modifier = Modifier
-                .size(160.dp, 180.dp)
-                .padding(12.dp)
-                .align(Alignment.CenterHorizontally)
-                .clip(
-                    RoundedCornerShape(10.dp)
-                ).clickable {
-                            openCharacterDetails(data)
-                },
-            elevation = CardDefaults.cardElevation(
-                defaultElevation = 4.dp
-            )
 
-        ) {
-            val image: Painter =
-                rememberAsyncImagePainter(model = data.image)
+    val mycolor:Color = if (character.house.equals("Gryffindor"))  Color(R.color.griffindor)
+
+    else if (character.house.equals("Slytherin"))   Color(R.color.slytherin)
+    else if (character.house.equals("Ravenclaw"))  Color(R.color.ravenclaw)
+    else if (character.house.equals("Hufflepuff"))  Color(R.color.hufflepuff) else Color.Blue
+
+
+    val imagePainter = rememberAsyncImagePainter(model = character.image)
+    Card(
+//        shape = MaterialTheme.shapes.medium,
+        modifier = Modifier.padding(16.dp).clickable {
+        openDetailScreen(character)
+    },
+        shape = RoundedCornerShape(size = 30.dp),
+
+
+
+    ) {
+        Box (modifier = Modifier
+                .fillMaxSize()
+            .background(mycolor,  RoundedCornerShape(size = 30.dp))){
+
             Image(
+                painter = imagePainter, contentDescription = null,
                 modifier = Modifier
-                    .fillMaxSize(),
-                painter = image,
-                contentDescription = "",
+                    .clip(shape = CircleShape)
+                    .height(150.dp),
                 contentScale = ContentScale.Crop
             )
+
+
+            Surface(
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = .3f),
+                modifier = Modifier.align(Alignment.BottomEnd),
+                contentColor = MaterialTheme.colorScheme.onSurface
+            ) {
+
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(14.dp)
+
+
+                ) {
+                    Text(
+                        text = "Real Name: ${character.actor} ",
+                        Modifier.align(Alignment.End),
+                        style = MaterialTheme.typography.bodyLarge
+                    )
+
+                    Text(
+                        text = "Actor Name: ${character.name} ",
+                        Modifier.align(Alignment.End),
+                        style = MaterialTheme.typography.bodySmall
+
+                    )
+
+                    Text(
+                        text = "Species: ${character.species} ",
+                        Modifier.align(Alignment.End),
+                        style = MaterialTheme.typography.bodySmall
+
+                    )
+
+                }
+
+
+
+
         }
 
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(
-            text = data.name,
-            fontSize = 14.sp,
-            color = Color.White,
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            maxLines = 1
-        )
+        }
+
     }
 }
