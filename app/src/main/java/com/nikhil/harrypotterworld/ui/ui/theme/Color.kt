@@ -16,3 +16,10 @@ val BackgroundDarkColor = Color(0xFF0F0B2B)
 
 val ErrorColor = Color(0xFFFF8989)
 val OnErrorColor = Color(0xFF000000)
+
+val GriffindorColor = Color(0xff740001)
+val slytherinColor = Color(0xff1a472a)
+val ravenclawColor = Color(0xff0c1a40)
+val hufflepuffColor = Color(0xffeeb939)
+
+

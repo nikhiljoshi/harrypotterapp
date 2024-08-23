@@ -33,6 +33,7 @@ import com.nikhil.harrypotterworld.R
 import com.nikhil.harrypotterworld.data.model.CharacterModel
 import com.nikhil.harrypotterworld.ui.details.components.TableCell
 import com.nikhil.harrypotterworld.ui.ui.theme.BackgroundDarkColor
+import com.nikhil.harrypotterworld.ui.ui.theme.BackgroundLightColor
 
 @Composable
 fun CharacterDetailScreen(
@@ -40,7 +41,7 @@ fun CharacterDetailScreen(
     navController: NavController,
 ) {
     val character = viewModel.selectedCharacter
-    Box(modifier = Modifier.fillMaxSize().background(BackgroundDarkColor)) {
+    Box(modifier = Modifier.fillMaxSize().background(BackgroundLightColor)) {
         Row(modifier = Modifier.padding(top = 6.dp)) {
             Image(
                 modifier = Modifier
@@ -111,24 +112,15 @@ fun TableScreen(characterModel: CharacterModel) {
             .padding(16.dp)
             .height(600.dp)
     ) {
-        // Here is the header
-        Row(Modifier.background(Color.Gray)) {
-            TableCell(text = "Character", weight = column1Weight)
-            TableCell(text = "Details", weight = column2Weight)
-        }
+
+
         // Here are all the lines of your table.
         Row(Modifier.fillMaxWidth()) {
             TableCell(text = "name", weight = column1Weight)
             TableCell(text = characterModel.name, weight = column2Weight)
         }
-        Row(Modifier.fillMaxWidth()) {
-            TableCell(text = "species", weight = column1Weight)
-            characterModel.species?.let { it1 -> TableCell(text = it1, weight = column2Weight) }
-        }
-        Row(Modifier.fillMaxWidth()) {
-            TableCell(text = "gender", weight = column1Weight)
-            TableCell(text = characterModel.gender, weight = column2Weight)
-        }
+
+
         Row(Modifier.fillMaxWidth()) {
             TableCell(text = "house", weight = column1Weight)
             characterModel.house?.let { it1 -> TableCell(text = it1, weight = column2Weight) }
@@ -137,45 +129,12 @@ fun TableScreen(characterModel: CharacterModel) {
             TableCell(text = "dateOfBirth", weight = column1Weight)
             characterModel.dateOfBirth?.let { it1 -> TableCell(text = it1, weight = column2Weight) }
         }
-        Row(Modifier.fillMaxWidth()) {
-            TableCell(text = "yearOfBirth", weight = column1Weight)
-            TableCell(text = characterModel.yearOfBirth.toString(), weight = column2Weight)
-        }
-        Row(Modifier.fillMaxWidth()) {
-            TableCell(text = "wizard", weight = column1Weight)
-            TableCell(text = characterModel.wizard.toString(), weight = column2Weight)
-        }
-        Row(Modifier.fillMaxWidth()) {
-            TableCell(text = "ancestry", weight = column1Weight)
-            TableCell(text = characterModel.ancestry, weight = column2Weight)
-        }
-        Row(Modifier.fillMaxWidth()) {
-            TableCell(text = "eye colour", weight = column1Weight)
-            characterModel.eyeColour?.let { it1 -> TableCell(text = it1, weight = column2Weight) }
-        }
-        Row(Modifier.fillMaxWidth()) {
-            TableCell(text = "hair colour", weight = column1Weight)
-            characterModel.hairColour?.let { it1 -> TableCell(text = it1, weight = column2Weight) }
-        }
-        Row(Modifier.fillMaxWidth()) {
-            TableCell(text = "patronus", weight = column1Weight)
-            characterModel.patronus?.let { it1 -> TableCell(text = it1, weight = column2Weight) }
-        }
-        Row(Modifier.fillMaxWidth()) {
-            TableCell(text = "hogwarts student", weight = column1Weight)
-            TableCell(text = characterModel.hogwartsStudent.toString(), weight = column2Weight)
-        }
-        Row(Modifier.fillMaxWidth()) {
-            TableCell(text = "hogwarts staff", weight = column1Weight)
-            TableCell(text = characterModel.hogwartsStaff.toString(), weight = column2Weight)
-        }
+
+
         Row(Modifier.fillMaxWidth()) {
             TableCell(text = "actor", weight = column1Weight)
             TableCell(text = characterModel.actor, weight = column2Weight)
         }
-        Row(Modifier.fillMaxWidth()) {
-            TableCell(text = "alive", weight = column1Weight)
-            TableCell(text = characterModel.alive.toString(), weight = column2Weight)
-        }
+
     }
 }

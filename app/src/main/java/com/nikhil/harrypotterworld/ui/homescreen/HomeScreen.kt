@@ -42,6 +42,11 @@ import com.nikhil.harrypotterworld.ui.homescreen.components.SearchWidgetState
 import com.nikhil.harrypotterworld.ui.Screen
 import com.nikhil.harrypotterworld.ui.ui.theme.BackgroundDarkColor
 import com.nikhil.harrypotterworld.ui.ui.theme.BackgroundDarkColorTwo
+import com.nikhil.harrypotterworld.ui.ui.theme.BackgroundLightColor
+import com.nikhil.harrypotterworld.ui.ui.theme.GriffindorColor
+import com.nikhil.harrypotterworld.ui.ui.theme.hufflepuffColor
+import com.nikhil.harrypotterworld.ui.ui.theme.ravenclawColor
+import com.nikhil.harrypotterworld.ui.ui.theme.slytherinColor
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -155,11 +160,11 @@ private fun CharacterCard(
     openDetailScreen: (CharacterModel) -> Unit
 ) {
 
-    val mycolor:Color = if (character.house.equals("Gryffindor"))  Color(R.color.griffindor)
+    val mycolor:Color = if (character.house.equals("Gryffindor"))  GriffindorColor
 
-    else if (character.house.equals("Slytherin"))   Color(R.color.slytherin)
-    else if (character.house.equals("Ravenclaw"))  Color(R.color.ravenclaw)
-    else if (character.house.equals("Hufflepuff"))  Color(R.color.hufflepuff) else Color.Blue
+    else if (character.house.equals("Slytherin"))   slytherinColor
+    else if (character.house.equals("Ravenclaw"))  ravenclawColor
+    else if (character.house.equals("Hufflepuff"))  hufflepuffColor else Color.Blue
 
 
     val imagePainter = rememberAsyncImagePainter(model = character.image)

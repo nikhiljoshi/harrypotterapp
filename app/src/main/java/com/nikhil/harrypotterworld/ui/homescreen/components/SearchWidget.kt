@@ -167,7 +167,7 @@ fun DefaultAppBar(
         colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.White),
         title = {
             Text(
-                text = "Search by name or house",
+                text = "Search by name or actor name",
                 color = Color.Black,
                 fontSize = 16.sp,
                 modifier = Modifier.clickable { onSearchClicked() }
