@@ -62,8 +62,10 @@ dependencies {
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+    implementation("androidx.room:room-ktx:2.6.1")
+    implementation("androidx.databinding:databinding-adapters:8.5.2")
     kapt("com.google.dagger:hilt-compiler:2.44")
-
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
     // coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")

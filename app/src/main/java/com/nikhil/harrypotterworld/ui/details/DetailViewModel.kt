@@ -13,7 +13,7 @@ class  DetailViewModel @Inject constructor() : ViewModel() {
     var selectedCharacter by mutableStateOf<CharacterModel?>(null)
         private set
 
-    fun selectCharacter(data: CharacterModel) {
+    fun selectedCharacter(data: CharacterModel) {
         selectedCharacter = data
     }
 

@@ -1,5 +1,8 @@
 package com.nikhil.harrypotterworld.data.model
 
+import androidx.room.Entity
+
+@Entity(tableName = "characters_table")
 data class CharacterModel(
     val actor: String,
     val alive: Boolean,

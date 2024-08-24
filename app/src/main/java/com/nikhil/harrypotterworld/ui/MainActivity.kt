@@ -46,7 +46,7 @@ fun NavHost(
         composable(
             route = Screen.HomeScreen.route
         ) {
-            HomeScreen(navController) { viewModel.selectCharacter(it) }
+            HomeScreen(navController) { viewModel.selectedCharacter(it) }
         }
         composable(
             route = Screen.DetailScreen.route

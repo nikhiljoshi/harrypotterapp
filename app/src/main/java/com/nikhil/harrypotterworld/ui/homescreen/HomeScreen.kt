@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -37,12 +38,12 @@ import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.nikhil.harrypotterworld.R
 import com.nikhil.harrypotterworld.data.model.CharacterModel
+import com.nikhil.harrypotterworld.ui.HomeViewModel
 import com.nikhil.harrypotterworld.ui.homescreen.components.MainAppBar
 import com.nikhil.harrypotterworld.ui.homescreen.components.SearchWidgetState
 import com.nikhil.harrypotterworld.ui.Screen
 import com.nikhil.harrypotterworld.ui.ui.theme.BackgroundDarkColor
 import com.nikhil.harrypotterworld.ui.ui.theme.BackgroundDarkColorTwo
-import com.nikhil.harrypotterworld.ui.ui.theme.BackgroundLightColor
 import com.nikhil.harrypotterworld.ui.ui.theme.GriffindorColor
 import com.nikhil.harrypotterworld.ui.ui.theme.hufflepuffColor
 import com.nikhil.harrypotterworld.ui.ui.theme.ravenclawColor
@@ -73,11 +74,13 @@ fun HomeScreen(
         ) {
 
             Image(
-                painter = painterResource(id = R.drawable.harry),
+                painter = painterResource(id = R.drawable.harry_potter_cast),
                 contentDescription = "",
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 60.dp, end = 60.dp, top = 50.dp)
+                    .height(150.dp)
+                    .width(600.dp)
             )
 
             Scaffold(

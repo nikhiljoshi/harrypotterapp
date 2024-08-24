@@ -1,4 +1,4 @@
-package com.nikhil.harrypotterworld.ui.homescreen
+package com.nikhil.harrypotterworld.ui
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.nikhil.harrypotterworld.util.Resource
 import com.nikhil.harrypotterworld.data.repository.GetCharactersUseCase
 import com.nikhil.harrypotterworld.ui.homescreen.components.SearchWidgetState
-import com.nikhil.harrypotterworld.ui.homescreen.state.CharacterListState
+import com.nikhil.harrypotterworld.ui.homescreen.state.CharactersState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.launchIn
@@ -22,8 +22,8 @@ class HomeViewModel @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    private val _characters = mutableStateOf(CharacterListState())
-    val characters: State<CharacterListState> = _characters
+    private val _characters = mutableStateOf(CharactersState())
+    val characters: State<CharactersState> = _characters
 
     private val _searchWidgetState: MutableState<SearchWidgetState> =
         mutableStateOf(value = SearchWidgetState.CLOSED)
@@ -55,7 +55,7 @@ class HomeViewModel @Inject constructor(
             getCharactersUseCase().onEach { result ->
                 when (result) {
                     is Resource.Success -> {
-                        _characters.value = CharacterListState(
+                        _characters.value = CharactersState(
                             characters = if (searchString.isEmpty()) {
                                 result.data ?: emptyList()
                             } else {
@@ -73,13 +73,13 @@ class HomeViewModel @Inject constructor(
                     }
 
                     is Resource.Error -> {
-                        _characters.value = CharacterListState(
+                        _characters.value = CharactersState(
                             error = result.message ?: "An unexpected error occurred"
                         )
                     }
 
                     is Resource.Loading -> {
-                        _characters.value = CharacterListState(isLoading = true)
+                        _characters.value = CharactersState(isLoading = true)
                     }
                 }
             }.launchIn(viewModelScope)
