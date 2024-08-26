@@ -58,7 +58,7 @@ fun CharacterDetailScreen(
             )
             Spacer(modifier = Modifier.width(16.dp))
             Text(
-                text = "Character Details",
+                text = "CharacterDto Details",
                 fontSize = 16.sp,
                 color = Color.White,
                 modifier = Modifier.align(Alignment.CenterVertically),

@@ -56,6 +56,16 @@ dependencies {
     implementation("io.coil-kt:coil-gif:2.1.0")
     implementation("io.coil-kt:coil-compose:2.2.2")
 
+
+    //implementation ("android.arch.persistence.room:runtime:1.1.1")
+    annotationProcessor  ("android.arch.persistence.room:compiler:1.1.1")
+
+    //Room Database
+    implementation ("androidx.room:room-runtime:2.6.1")
+    kapt ("androidx.room:room-compiler:2.6.1")
+    // optional - Kotlin Extensions and Coroutines support for Room
+
+
     //Dagger-Hilt
     implementation("com.google.dagger:hilt-android:2.44")
     implementation("androidx.appcompat:appcompat:1.6.1")

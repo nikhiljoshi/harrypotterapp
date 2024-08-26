@@ -12,8 +12,7 @@ interface CharacterDetailsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCharacters(characterEntity: List<CharacterModel>)
 
-    @Query("SELECT * FROM characters_table")
+    @Query("SELECT * FROM CharacterModel")
     fun getCharacters(): List<CharacterModel>
-
 
 }

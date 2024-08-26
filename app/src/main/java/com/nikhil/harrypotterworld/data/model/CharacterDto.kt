@@ -1,7 +1,7 @@
 package com.nikhil.harrypotterworld.data.model
 
 
-data class Character(
+data class CharacterDto(
     val actor: String,
     val alive: Boolean,
     val alternate_actors: List<Any>,
@@ -24,7 +24,7 @@ data class Character(
     val yearOfBirth: Int? = null
 )
 
-fun Character.toCharacter(): CharacterModel {
+fun CharacterDto.toCharacter(): CharacterModel {
     return CharacterModel(
         actor,
         alive,

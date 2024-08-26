@@ -5,6 +5,8 @@ import com.nikhil.harrypotterworld.data.model.CharacterModel
 import kotlinx.coroutines.flow.Flow
 
 interface CharactersRepository {
+    fun getCharactersFromApi(): Flow<Resource<List<CharacterModel>>>
 
-    fun getCharacters(): Flow<Resource<List<CharacterModel>>>
+    fun addCharactersToLocal(characterEntity: List<CharacterModel>)
+    fun getCharactersFromLocal(): Flow<Resource<List<CharacterModel>>>
 }

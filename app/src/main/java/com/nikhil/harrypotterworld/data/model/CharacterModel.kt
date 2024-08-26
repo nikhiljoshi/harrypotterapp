@@ -1,9 +1,11 @@
 package com.nikhil.harrypotterworld.data.model
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@Entity(tableName = "characters_table")
+@Entity
 data class CharacterModel(
+    @PrimaryKey
     val actor: String,
     val alive: Boolean,
     val ancestry: String,
@@ -14,6 +16,7 @@ data class CharacterModel(
     val hogwartsStaff: Boolean? = null,
     val hogwartsStudent: Boolean? = null,
     val house: String? = null,
+
     val id: String? = null,
     val image: String? = null,
     val name: String,

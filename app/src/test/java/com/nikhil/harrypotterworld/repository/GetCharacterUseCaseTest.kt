@@ -6,6 +6,7 @@ import com.nikhil.harrypotterworld.util.Resource
 import com.nikhil.harrypotterworld.data.model.CharacterModel
 import com.nikhil.harrypotterworld.data.repository.GetCharactersUseCase
 import com.nikhil.harrypotterworld.ui.homescreen.state.CharactersState
+import com.nikhil.moviesapp.data.local.dao.CharacterDetailsDao
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -36,7 +37,8 @@ class GetCharacterUseCaseTest {
     private val testDispatcher = StandardTestDispatcher()
     private val testScope = TestScope(testDispatcher)
     private val repository = mockk<CharactersRepositoryImpl>()
-    private val getCharactersUseCase = GetCharactersUseCase(repository)
+    private val characterDetailsDao = mockk<CharacterDetailsDao>()
+    private val getCharactersUseCase = GetCharactersUseCase(repository,characterDetailsDao)
 
     @Before
     fun setUp() {
@@ -54,7 +56,7 @@ class GetCharacterUseCaseTest {
         // Given
         val expectedState = CharactersState(characters = listOf(character))
 
-        coEvery { repository.getCharacters() } returns flowOf(
+        coEvery { repository.getCharactersFromApi() } returns flowOf(
             Resource.Success(
                 listOf(
                     character
@@ -65,7 +67,7 @@ class GetCharacterUseCaseTest {
         // When
         val result = getCharactersUseCase.invoke()
         advanceUntilIdle()
-        coVerify { repository.getCharacters() }
+        coVerify { repository.getCharactersFromApi() }
         // Then
         result.onEach {
             when (it) {

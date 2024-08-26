@@ -1,13 +1,14 @@
 package com.nikhil.harrypotterworld.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.nikhil.harrypotterworld.data.model.Character
+import com.nikhil.harrypotterworld.data.model.CharacterDto
 import com.nikhil.harrypotterworld.data.model.Wand
 import com.nikhil.harrypotterworld.data.model.toCharacter
 import com.nikhil.harrypotterworld.data.api.CharactersApi
 import com.nikhil.harrypotterworld.data.repository.CharactersRepositoryImpl
 import com.nikhil.harrypotterworld.util.Resource
 import com.nikhil.harrypotterworld.ui.homescreen.state.CharactersState
+import com.nikhil.moviesapp.data.local.dao.CharacterDetailsDao
 import io.mockk.coEvery
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals
@@ -36,7 +37,8 @@ class CharacterRepositoryTest {
     private val testDispatcher = StandardTestDispatcher()
     private val testScope = TestScope(testDispatcher)
     private val charactersApi: CharactersApi = mockk()
-    private val charactersRepository = CharactersRepositoryImpl(charactersApi)
+    private val characterDetailsDao = mockk<CharacterDetailsDao>()
+    private val charactersRepository = CharactersRepositoryImpl(charactersApi,characterDetailsDao)
 
     @Before
     fun setUp() {
@@ -52,12 +54,12 @@ class CharacterRepositoryTest {
     @Test
     fun verifyCharactersRepository() = runTest {
         // Given
-        val expectedState = CharactersState(characters = listOf(character.toCharacter()))
+        val expectedState = CharactersState(characters = listOf(characterDto.toCharacter()))
 
-        coEvery { charactersApi.getCharacters() } returns listOf(character)
+        coEvery { charactersApi.getCharacters() } returns listOf(characterDto)
 
         // When
-        val result = charactersRepository.getCharacters()
+        val result = charactersRepository.getCharactersFromApi()
         advanceUntilIdle()
         // Then
         result.onEach {
@@ -73,7 +75,7 @@ class CharacterRepositoryTest {
     }
 
     companion object {
-        private val character = Character(
+        private val characterDto = CharacterDto(
             "Harry Potter",
             true,
             emptyList(),
